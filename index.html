@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>천사일지 PC버전 다운로드</title>
+<style>
+  body { margin:0; font-family:'Pretendard','Malgun Gothic',sans-serif; background:#f0fdfa;
+         display:flex; align-items:center; justify-content:center; min-height:100vh; color:#111827; }
+  .card { background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.10);
+          padding:40px 36px; max-width:440px; width:90%; text-align:center; }
+  h1 { font-size:22px; margin:0 0 6px; color:#16a085; }
+  p { font-size:15px; line-height:1.7; color:#374151; margin:10px 0; }
+  .btn { display:inline-block; margin-top:14px; padding:14px 28px; background:#16a085; color:#fff;
+         font-size:16px; font-weight:700; border-radius:10px; text-decoration:none; }
+  .btn:hover { background:#0f766e; }
+  .sub { font-size:13px; color:#6b7280; margin-top:18px; }
+  .spin { width:34px;height:34px;border:4px solid #d1fae5;border-top-color:#16a085;border-radius:50%;
+          animation:r 1s linear infinite; margin:10px auto; }
+  @keyframes r { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h1>🩺 천사일지 PC버전</h1>
+    <p id="msg">최신 설치파일을 준비하고 있습니다…</p>
+    <div class="spin" id="spin"></div>
+    <a class="btn" id="dl" style="display:none">⬇ 다운로드</a>
+    <p class="sub">자동으로 다운로드가 시작되지 않으면 위 버튼을 눌러주세요.<br/>설치 후 기존 데이터는 그대로 유지됩니다.</p>
+  </div>
+<script>
+  var REPO = 'healingsam/angel-ilg-pc-releases';
+  function fail(href){
+    document.getElementById('spin').style.display='none';
+    document.getElementById('msg').textContent = '아래 버튼을 눌러 다운로드해 주세요.';
+    var b=document.getElementById('dl'); b.style.display='inline-block';
+    b.href = href || ('https://github.com/'+REPO+'/releases/latest');
+  }
+  fetch('https://api.github.com/repos/'+REPO+'/releases/latest')
+    .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+    .then(function(d){
+      var exe = (d.assets||[]).find(function(a){ return /\.exe$/i.test(a.name); });
+      if(!exe) return fail();
+      var url = exe.browser_download_url;
+      document.getElementById('spin').style.display='none';
+      document.getElementById('msg').textContent = (d.name||d.tag_name) + ' 다운로드를 시작합니다.';
+      var b=document.getElementById('dl'); b.style.display='inline-block'; b.href=url;
+      setTimeout(function(){ window.location.href = url; }, 600);
+    })
+    .catch(function(){ fail(); });
+</script>
+</body>
+</html>

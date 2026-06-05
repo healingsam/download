@@ -6,9 +6,9 @@
 <title>천사일지 PC버전 다운로드</title>
 <style>
   body { margin:0; font-family:'Pretendard','Malgun Gothic',sans-serif; background:#f0fdfa;
-         display:flex; align-items:center; justify-content:center; min-height:100vh; color:#111827; }
+         display:flex; align-items:center; justify-content:center; min-height:100vh; color:#111827; padding:20px 0; }
   .card { background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.10);
-          padding:40px 36px; max-width:440px; width:90%; text-align:center; }
+          padding:36px 32px; max-width:460px; width:90%; text-align:center; }
   h1 { font-size:22px; margin:0 0 6px; color:#16a085; }
   p { font-size:15px; line-height:1.7; color:#374151; margin:10px 0; }
   .btn { display:inline-block; margin-top:14px; padding:14px 28px; background:#16a085; color:#fff;
@@ -18,6 +18,14 @@
   .spin { width:34px;height:34px;border:4px solid #d1fae5;border-top-color:#16a085;border-radius:50%;
           animation:r 1s linear infinite; margin:10px auto; }
   @keyframes r { to { transform:rotate(360deg); } }
+  .warn { margin-top:22px; text-align:left; background:#fffbeb; border:1px solid #fde68a;
+          border-radius:12px; padding:16px 18px; }
+  .warn .title { color:#92400e; font-size:15px; font-weight:800; margin-bottom:8px; }
+  .warn .pub { font-size:13px; color:#6b7280; margin:0 0 10px; }
+  .warn ol { margin:6px 0 0; padding-left:20px; }
+  .warn li { font-size:14px; line-height:1.9; color:#374151; }
+  .warn .k { color:#111827; font-weight:700; }
+  .warn .ok { font-size:13px; color:#16a085; margin:12px 0 0; }
 </style>
 </head>
 <body>
@@ -27,6 +35,15 @@
     <div class="spin" id="spin"></div>
     <a class="btn" id="dl" style="display:none">⬇ 다운로드</a>
     <p class="sub">자동으로 다운로드가 시작되지 않으면 위 버튼을 눌러주세요.<br/>설치 후 기존 데이터는 그대로 유지됩니다.</p>
+    <div class="warn">
+      <div class="title">⚠️ "일반적으로 다운로드되지 않습니다" 경고가 떠도 정상이에요</div>
+      <p class="pub">게시자가 <span class="k">Healingsam Co.,Ltd</span> 로 표시되면 안전한 정식 서명 파일입니다.</p>
+      <ol>
+        <li>다운로드 칸의 <span class="k">···</span> → <span class="k">유지</span> → (확인창) <span class="k">삭제 옆 ▼</span> → <span class="k">그래도 계속</span></li>
+        <li>설치파일 실행 시 파란 창이 뜨면 <span class="k">추가 정보</span> → <span class="k">실행</span></li>
+      </ol>
+      <p class="ok">여러 분이 설치하시면 이 경고는 며칠 내 자동으로 사라집니다. 🙂</p>
+    </div>
   </div>
 <script>
   var REPO = 'healingsam/angel-ilg-pc-releases';
